@@ -51,4 +51,4 @@
 
 - name: remove selinux-policy when Pam is used, because Allowing sshd to read the shadow file directly is considered a potential security risk (http://danwalsh.livejournal.com/12333.html)
   shell: semodule -r ssh_password
-  when: sestatus.rc == 0 and ssh_use_pam
+  when: ssh_use_pam and sestatus.rc == 0 and sestatus.stdout != 'Disabled'
